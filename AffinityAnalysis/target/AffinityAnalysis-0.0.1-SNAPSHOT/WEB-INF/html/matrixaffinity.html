@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Affine Affinity Tool</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="mystyle.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="d3.v3.js"></script>
+<script src="myscript.js"></script>
+<style>
+
+/*@import url(../style.css?aea6f0a);*/
+
+.background {
+  fill: #eee;
+}
+
+line {
+  stroke: #fff;
+}
+
+text.active {
+  fill: red;
+  font-weight : bold;
+  font-size: larger;
+}
+
+text {
+  font-family: sans-serif; 
+   font-weight : bold;
+}
+
+
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+		<a href="#" class="pull-left"><img src="affine.png" width="100" height="50" style="margin-right:20px;"></a>
+      <!-- <a class="navbar-brand" href="#">AFFINE ANALYTICS</a> -->
+    </div>
+    <div>
+      <ul class="nav navbar-nav ">
+        <li ><a href="home.html">Home</a></li>
+        <li><a href="viewstrategies.html">Rules</a></li>
+        <li class="active"><a href="scatteraffinity.html">Dashboard</a></li>
+        <li><a href="#">Reports</a></li>
+		<li ><a href="runaffinity.html">Admin</a></li>
+      </ul>
+	  <ul class="nav navbar-nav navbar-right">
+        <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+       <!--  <li class="dropdown"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a> -->
+		<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Sign Out</a></li>
+            <li><a href="#">Change Password</a></li>
+            <li><a href="#">Contact Support</a></li>
+          </ul>
+        </li>
+		</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="col-md-2" id="left">
+			<ul class="nav nav-pills nav-stacked" id="leftnav">
+				<li id="one"><a href="scatteraffinity.html"><span class="fa fa-bar-chart-o"></span> Scatter Plot</a></li>
+				<li class="active"><a href="matrixaffinity.html"><span class="glyphicon glyphicon-picture"></span> Matrix Layout</a></li>
+			</ul>
+			<div class="addspace">
+				<p class="text-info"><mark>Support</mark> indicates prevelance of product(s)</p>
+				<p class="text-info"><mark>Confidence</mark> indicates predictability of one product given the other product</p>	
+				<p class="text-info"><mark>Lift</mark> indicates likelihood of two products going together</p>		
+			</div>
+</div>
+<div class="col-md-10" id="runaffinity">
+	<div class="col-md-12">
+	<h3>View Affinity</h3>
+	</div>
+		<div class="col-md-12">
+		<div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" id="dropdownMenu1" type="button" data-toggle="dropdown">Select Date
+			<span class="caret"></span></button>
+			<ul class="dropdown-menu dropdown-menu-right">
+			  <li><a href="#">20/04/15</a></li>
+			  <li><a href="#">20/04/15</a></li>
+			  <li><a href="#">20/04/15</a></li>
+			</ul>
+		</div>
+		</div>
+	<div class="col-md-12">
+		  <h5>Type of Affinity</h5>
+			<form role="form" id="TOA">
+				<label class="radio-inline">
+				  <input type="radio" name="optradio">Department-Department
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="optradio">Category-Category
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="optradio">Item-Item
+				</label>
+			</form>
+	</div>	
+	<div class="col-md-12">
+		  <h5>Select Across</h5>
+			<form role="form" id="SA">
+				<div class="col-md-2">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" id="dropdownMenu2" type="button" data-toggle="dropdown">All Departments
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+						  <li><a href="#">D1</a></li>
+						  <li><a href="#">D2</a></li>
+						  <li><a href="#">D3</a></li>
+						</ul>
+					</div>	
+				</div>	
+				<div class="col-md-2">	
+						<button class="btn btn-default dropdown-toggle" id="dropdownMenu3" type="button" data-toggle="dropdown">All Categories
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+						  <li><a href="#">C1</a></li>
+						  <li><a href="#">C2</a></li>
+						  <li><a href="#">C3</a></li>
+						</ul>
+				</div>
+				<div class="col-md-2">				
+						<button class="btn btn-default dropdown-toggle" id="dropdownMenu4" type="button" data-toggle="dropdown">Select Affinity
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+						  <li><a href="#">Support</a></li>
+						  <li><a href="#">Confidence</a></li>
+						  <li><a href="#">Lift</a></li>
+						</ul>
+					</div>
+				<div class="col-md-3">	
+				<input type="text" class="form-control" id="afnty">
+				</div>
+				<div class="col-md-3">	
+				<button type="button" class="btn btn-primary">Search</button>
+				</div>
+				
+			</form>
+	</div>
+
+<div class="col-md-12">
+	<!-- <h1>Affinity Association Matrix</h1> -->
+
+<aside style="margin-top:40px;">
+<p>Order: <select id="order">
+  <option value="name">by Name</option>
+  <option value="count">by Frequency</option>
+  <option value="group">by Cluster</option>
+</select>
+</aside>
+
+<script type="text/javascript">
+
+var margin = {top: 100, right: 0, bottom: 10, left: 120},
+    width = 420,
+    height = 420;
+
+var x = d3.scale.ordinal().rangeBands([0, width]),
+    z = d3.scale.linear().domain([0,1500]).clamp(true),
+   <!--  c = d3.scale.threshold().domain([0,1,2]).range(["red", "yellow", "green"]);  -->
+	c = d3.scale.category10().domain(d3.range(10));
+	 
+var svg = d3.select("#runaffinity").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    <!-- .style("margin-left", -margin.left + "px") -->
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.json("group.json", function(data) {
+  var matrix = [],
+      nodes = data.nodes,
+      n = nodes.length;
+	console.log(nodes);
+  // Compute index per node.
+  nodes.forEach(function(node, i) {
+    node.index = i;
+    node.count = 0;
+    matrix[i] = d3.range(n).map(function(j) { return {x: j, y: i, z: 0}; });
+  });
+<!-- console.log(matrix[0]); -->
+  // Convert links to matrix; count character occurrences.
+  data.links.forEach(function(link) {
+    matrix[link.source][link.target].z += link.value;
+    matrix[link.target][link.source].z += link.value;
+    matrix[link.target][link.target].z += link.value;
+    matrix[link.source][link.source].z += link.value;
+    nodes[link.source].count += link.value;
+    nodes[link.target].count += link.value;
+	matrix[link.source][link.target].weight = link.value;
+	
+  });
+
+  // Precompute the orders.
+  var orders = {
+    name: d3.range(n).sort(function(a, b) { return d3.ascending(nodes[a].name, nodes[b].name); }),
+    count: d3.range(n).sort(function(a, b) { return nodes[b].count - nodes[a].count; }),
+    group: d3.range(n).sort(function(a, b) { return nodes[b].group - nodes[a].group; })
+  };
+
+  // The default sort order.
+  x.domain(orders.name);
+
+  svg.append("rect")
+      .attr("class", "background")
+      .attr("width", width)
+      .attr("height", height);
+
+  var row = svg.selectAll(".row")
+      .data(matrix)
+    .enter().append("g")
+      .attr("class", "row")
+      .attr("transform", function(d, i) { return "translate(0," + x(i) + ")"; })
+      .each(row);
+	  <!-- console.log(row); -->
+
+  row.append("line")
+      .attr("x2", width);
+
+  row.append("text")
+      .attr("x", -6)
+      .attr("y", x.rangeBand() / 2)
+      .attr("dy", ".32em")
+      .attr("text-anchor", "end")
+      .text(function(d, i) { return nodes[i].name; });
+
+  var column = svg.selectAll(".column")
+      .data(matrix)
+    .enter().append("g")
+      .attr("class", "column")
+      .attr("transform", function(d, i) { return "translate(" + x(i) + ")rotate(-90)"; });
+
+  column.append("line")
+      .attr("x1", -width);
+
+  column.append("text")
+      .attr("x", 6)
+      .attr("y", x.rangeBand() / 2)
+      .attr("dy", ".32em")
+      .attr("text-anchor", "start")
+      .text(function(d, i) { return nodes[i].name; });
+
+  function row(row) {
+    var cell = d3.select(this).selectAll(".cell")
+        .data(row.filter(function(d) { return d.z; }))
+		.enter().append("rect")
+        .attr("class", "cell")
+        .attr("x", function(d) { return x(d.x); })
+        .attr("width", x.rangeBand())
+        .attr("height", x.rangeBand())
+        .style("fill-opacity", function(d) { return z(d.z); })
+        <!-- .style("fill", function(d) { return nodes[d.x].group == nodes[d.y].group ? c(nodes[d.x].group) : null; }) -->
+		.style("fill", function(d) {            // <== Add these
+            if (d.weight <= 200) {return "blue"}
+			if (d.weight > 500) {return "green"}									// <== Add these
+            else    { return "yellow" };})
+        .on("mouseover", mouseover)
+        .on("mouseout", mouseout)
+		.append("svg:title").text(function(d) { return d.weight; });
+		<!-- console.log(matrix); -->
+		  <!-- console.log(cell);  -->
+		 <!-- console.log(nodes);  -->
+  }
+	
+  function mouseover(p) {
+    d3.selectAll(".row text").classed("active", function(d, i) { return i == p.y; });
+    d3.selectAll(".column text").classed("active", function(d, i) { return i == p.x; });
+	
+    window.status="(" + p.x + "/" + p.y + ")";
+  }
+
+  function mouseout() {
+    d3.selectAll("text").classed("active", false);
+  }
+
+  d3.select("#order").on("change", function() {
+    clearTimeout(timeout);
+    order(this.value);
+  });
+
+  function order(value) {
+    x.domain(orders[value]);
+
+    var t = svg.transition().duration(2500);
+
+    t.selectAll(".row")
+        .delay(function(d, i) { return x(i) * 4; })
+        .attr("transform", function(d, i) { return "translate(0," + x(i) + ")"; })
+      .selectAll(".cell")
+        .delay(function(d) { return x(d.x) * 4; })
+        .attr("x", function(d) { return x(d.x); });
+
+    t.selectAll(".column")
+        .delay(function(d, i) { return x(i) * 4; })
+        .attr("transform", function(d, i) { return "translate(" + x(i) + ")rotate(-90)"; });
+  }
+
+  var timeout = setTimeout(function() {
+    //order("group");
+    d3.select("#order").property("selectedIndex", 2).node().focus();
+  }, 5000);
+});
+
+</script>
+</div>
+</div>	
+<div class="clearfix visible-lg"></div> 
+</body>
+</html>

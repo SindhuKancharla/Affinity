@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Affine Affinity Tool</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="mystyle.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+<script src="myscript.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+		<a href="#" class="pull-left"><img src="affine.png" width="100" height="50" style="margin-right:20px;"></a>
+      <!-- <a class="navbar-brand" href="#">AFFINE ANALYTICS</a> -->
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li ><a href="home.html">Home</a></li>
+        <li><a href="viewstrategies.html">Rules</a></li>
+        <li><a href="scatteraffinity.html">Dashboard</a></li>
+        <li><a href="#">Reports</a></li>
+		<li class="active"><a href="runaffinity.html">Admin</a></li>
+      </ul>
+	  <ul class="nav navbar-nav navbar-right">
+        <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
+		<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Sign Out</a></li>
+            <li><a href="#">Change Password</a></li>
+            <li><a href="#">Contact Support</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="col-md-2" id="left">
+			<ul class="nav nav-pills nav-stacked" id="leftnav">
+				<li id="one"><a href="runaffinity.html"><span class="glyphicon glyphicon-play"></span> Run Affinity</a></li>
+				<li class="active"><a href="viewaffinity.html"><span class="glyphicon glyphicon-camera"></span> View Affinity</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span> Create User</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-cloud"></span> Connect Database</a></li>
+			</ul>
+			<div class="addspace">
+				<p class="text-info"><mark>Support</mark> indicates prevelance of product(s)</p>
+				<p class="text-info"><mark>Confidence</mark> indicates predictability of one product given the other product</p>	
+				<p class="text-info"><mark>Lift</mark> indicates likelihood of two products going together</p>		
+			</div>
+</div>
+<div class="col-md-10" id="runaffinity">
+	<div class="col-md-12">
+	<h3>View Affinity</h3>
+	</div>
+		<div class="col-md-12">
+		<div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" id="dropdownMenu1" type="button" data-toggle="dropdown">Select Date
+			<span class="caret"></span></button>
+			<ul class="dropdown-menu dropdown-menu-right">
+			  <li><a href="#">20/04/15</a></li>
+			  <li><a href="#">20/04/15</a></li>
+			  <li><a href="#">20/04/15</a></li>
+			</ul>
+		</div>
+		</div>
+	<div class="col-md-12">
+		  <h5>Type of Affinity</h5>
+			<form role="form" id="TOA">
+				<label class="radio-inline">
+				  <input type="radio" name="optradio">Department-Department
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="optradio">Category-Category
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="optradio">Item-Item
+				</label>
+			</form>
+	</div>	
+	<div class="col-md-12">
+		  <h5>Select Across</h5>
+			<form role="form" id="SA">
+				<div class="col-md-2">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" id="dropdownMenu2" type="button" data-toggle="dropdown">All Departments
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+						  <li><a href="#">D1</a></li>
+						  <li><a href="#">D2</a></li>
+						  <li><a href="#">D3</a></li>
+						</ul>
+					</div>	
+				</div>	
+				<div class="col-md-2">	
+						<button class="btn btn-default dropdown-toggle" id="dropdownMenu3" type="button" data-toggle="dropdown">All Categories
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+						  <li><a href="#">C1</a></li>
+						  <li><a href="#">C2</a></li>
+						  <li><a href="#">C3</a></li>
+						</ul>
+				</div>
+				<div class="col-md-2">				
+						<button class="btn btn-default dropdown-toggle" id="dropdownMenu4" type="button" data-toggle="dropdown">Select Affinity
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+						  <li><a href="#">Support</a></li>
+						  <li><a href="#">Confidence</a></li>
+						  <li><a href="#">Lift</a></li>
+						</ul>
+					</div>
+				<div class="col-md-3">	
+				<input type="text" class="form-control" id="afnty">
+				</div>
+				<div class="col-md-3">	
+				<button type="button" class="btn btn-primary">Search</button>
+				</div>
+				
+			</form>
+	</div>
+</div>	
+
+<div class="clearfix visible-lg"></div> 
+</body>
+</html>
